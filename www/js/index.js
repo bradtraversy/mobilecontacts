@@ -78,7 +78,7 @@ function saveContact(){
 // Contact Added
 function onSaveSuccess(contact){
     alert('Your Contact Has Been Saved');
-    getContacts();
+    //getContacts();
     window.location.href="#home";
 }
 
