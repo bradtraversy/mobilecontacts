@@ -9,10 +9,7 @@ function onDeviceReady() {
            saveContact();
        });
 
-       $('#editContact').on('click', function(){
-           alert('HI');console.log('HI');
-       });
-
+       // Get List Of Contacts
        getContacts();
    });
 }     
@@ -31,7 +28,7 @@ function getContacts(){
 function onGetSuccess(contacts){
     $('#contactMsg').hide();
     for (var i = 0; i < contacts.length; i++) {
-        $('#contactList').append('<li><a id="editContact" href="#edit" data-contact_id="'+contacts[i].id+'">'+contacts[i].displayName+'</a></li>');
+        $('#contactList').append('<li><a id="editContact" href="#edit?id='+contacts[i].id+'">'+contacts[i].displayName+'</a></li>');
     }
     $( "#contactList" ).listview( "refresh" );
 }
@@ -82,6 +79,44 @@ function onSaveSuccess(contact){
 
 // Contact Add Error
 function onSaveError(error){
+    alert('Error: '+ error.code);
+}
+
+// Listen for any attempts to call changePage().
+$(document).bind( "pagebeforechange", function( e, data ) {
+    if ( typeof data.toPage === "string" ) {
+        var u = $.mobile.path.parseUrl( data.toPage ),
+            re = /^#edit/;
+
+        if ( u.hash.search(re) !== -1 ) {       
+            showContact( u, data.options );
+            //e.preventDefault();
+        }
+    }
+});
+
+
+function showContact( urlObj, options ){
+   var contactId = urlObj.hash.replace( /.*id=/, "" );
+ 
+   //$('input[id=firstName]').val(contactId);
+
+   var options = new ContactFindOptions();
+    options.filter=contactId; 
+    options.multiple=false;
+    var fields = ["displayName","id"];
+    navigator.contacts.find(fields, onGetSingleSuccess, onGetSingleError, options);
+}
+
+// Contacts Fetched
+function onGetSingleSuccess(contacts){
+   console.log(contacts[0]);
+   $('input[id=firstName]').val(contacts[0].name.givenName);
+   $('input[id=lastName]').val(contacts[0].name.familyName);
+}
+
+// Contact Fetch Error
+function onGetSingleError(error){
     alert('Error: '+ error.code);
 }
 
