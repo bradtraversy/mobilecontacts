@@ -68,6 +68,10 @@ function saveContact(){
     //Save Contact   
     myContact.save(onSaveSuccess, onSaveError);
 
+    // Clear Form
+    $('#addForm input').not('[type="button"]').val(''); // clear inputs except buttons, setting value to blank
+    $('#addForm  select').val(''); // clear select
+    $('#addForm  textarea').val(''); // set text area value to blank
 
 }
 
