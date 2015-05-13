@@ -4,7 +4,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 //Device is ready
 function onDeviceReady() {
    $(document).ready(function(){
-       $('#saveBtn').bind('click',function(){
+       $('#saveBtn').on('click', function(){
            saveContact();
        });
    });
@@ -13,25 +13,25 @@ function onDeviceReady() {
 function saveContact(){
     console.log('Getting Contact Info...');
     //Create variables from form input
-    var firstName    = document.getElementById('firstName').value;
-    var lastName     = document.getElementById('lastName').value;
-    var fullName     = document.getElementById('firstName').value+' '+document.getElementById('lastName').value;
-    var note         = document.getElementById('note').value
-    var emailAddress = document.getElementById('email').value
+    var firstName    = $('#firstName').val();
+    var lastName     = $('#lastName').val();
+    var fullName     = $('#firstName').val()+' '+$('#lastName').val();
+    var note         = $('#note').val();
+    var emailAddress = $('#email').val();
     
     //Create contact object
-    var theContact = navigator.contacts.create({"displayName" : fullName});
+    var myContact = navigator.contacts.create({"displayName" : fullName});
     //
     //Note Field
-    theContact.note = note;
+    myContact.note = note;
     
     //Email Field
     var emails = [];
     emails[0] = new ContactField('email', emailAddress, false); 
-    theContact.emails = emails;
+    myContact.emails = emails;
     
     //Save contact info   
-    theContact.save(onSaveSuccess,onSaveError);             
+    myContact.save(onSaveSuccess, onSaveError);             
 }
 
 function onSaveSuccess(contact){
