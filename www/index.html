@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" href="css/jquery.mobile.css" />
+        <link rel="stylesheet" href="css/jquery.mobile.theme.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>MobileContacts</title>
+    </head>
+    <body>
+        <div class="app">
+            <!-- App HTML -->
+            <div data-role="page">
+
+                <div data-role="header">
+                    <h1>Add a Contact</h1>
+                </div><!-- /header -->
+
+                <div data-role="content">   
+                    <form>
+                        <label for="first_name">First Name:</label>
+                        <input type="text" name="first_name" id="first_name" data-mini="true" />
+                        <label for="last_name">Last Name:</label>
+                        <input type="text" name="last_name" id="last_name" data-mini="true" />
+                        <label for="note">Note:</label>
+                        <textarea name="note" id="note"></textarea>
+                        <input type="submit" value="Add Contact" id="saveContact">
+                    </form>
+                </div><!-- /content -->
+                
+                <div data-role="footer">
+                    <h4>Footer content</h4>
+                </div><!-- /footer -->
+                
+            </div><!-- /page -->
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery.mobile.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>
