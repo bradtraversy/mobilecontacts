@@ -1,44 +1,43 @@
-var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
+//Add event listener to run when the device is ready
+document.addEventListener("deviceready", onDeviceReady, false);
+
+//Device is ready
+function onDeviceReady() {
+   $(document).ready(function(){
+       $('#saveBtn').bind('click',function(){
+           saveContact();
+       });
+   });
+}     
+
+function saveContact(){
+    console.log('Getting Contact Info...');
+    //Create variables from form input
+    var firstName    = document.getElementById('firstName').value;
+    var lastName     = document.getElementById('lastName').value;
+    var fullName     = document.getElementById('firstName').value+' '+document.getElementById('lastName').value;
+    var note         = document.getElementById('note').value
+    var emailAddress = document.getElementById('email').value
+    
+    //Create contact object
+    var theContact = navigator.contacts.create({"displayName" : fullName});
     //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-        document.getElementById('saveContact').addEventListener('click', this.saveContact, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+    //Note Field
+    theContact.note = note;
+    
+    //Email Field
+    var emails = [];
+    emails[0] = new ContactField('email', emailAddress, false); 
+    theContact.emails = emails;
+    
+    //Save contact info   
+    theContact.save(onSaveSuccess,onSaveError);             
+}
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+function onSaveSuccess(contact){
+    alert('Your Contact Has Been Saved');
+}
 
-        console.log('Received Event: ' + id);
-    },
-    saveContact: function(){
-        // Get Form Info
-        var full_name = document.getElementById('first_name').value+" "+document.getElementById('last_name').value;
-        var note = document.getElementById('note').value;
-
-        var myContact = navigator.contacts.create({"displayName": full_name});
-        myContact.note = note;
-
-        contact.save();
-
-        console.log('Saving Contact ' +full_name+'...');
-    }
-};
+function onSaveError(error){
+    alert('Error: '+ error.code);
+}

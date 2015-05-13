@@ -21,14 +21,16 @@
                 </div><!-- /header -->
 
                 <div data-role="content">   
-                    <form>
-                        <label for="first_name">First Name:</label>
-                        <input type="text" name="first_name" id="first_name" data-mini="true" />
-                        <label for="last_name">Last Name:</label>
-                        <input type="text" name="last_name" id="last_name" data-mini="true" />
-                        <label for="note">Note:</label>
-                        <textarea name="note" id="note"></textarea>
-                        <input type="submit" value="Add Contact" id="saveContact">
+                   <form>
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" />
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" />
+                        <label for="email">Email Address</label>
+                        <input type="text" id="email" />
+                        <label for="note">Note</label>
+                        <textarea id="note"></textarea>
+                        <input type="button" name="save" id="saveBtn" value="Save Contact" />
                     </form>
                 </div><!-- /content -->
                 
@@ -38,12 +40,9 @@
                 
             </div><!-- /page -->
         </div>
-        <script type="text/javascript" src="cordova.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/jquery.mobile.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
     </body>
 </html>
