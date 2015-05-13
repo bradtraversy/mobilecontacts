@@ -19,13 +19,16 @@
 
                 <div data-role="header">
                     <h1>Mobile Contacts</h1>
+                    <a href="#add" data-icon="plus" data-theme="b" class="ui-btn-right">Add Contact</a>
                 </div><!-- /header -->
 
-                <div data-role="content">   
-                    <a href="#add" data-role="button">Add Contact</a>
+                <div data-role="content"> 
+                    <form class="ui-filterable">
+                        <input id="filterBasic-input" data-type="search" placeholder="Filter Contacts...">
+                    </form> 
                     <p id="contactMsg">Please wait while we fetch your contacts...</p>
                     <br><br>
-                    <ul id="contactList" data-role="listview">
+                    <ul id="contactList" data-role="listview" data-filter="true" data-input="#filterBasic-input">
                     
                     </ul>
                 </div><!-- /content -->
@@ -53,6 +56,39 @@
                         <input type="text" id="lastName" />
                         <label for="email">Email Address</label>
                         <input type="text" id="email" />
+                        <label for="phone">Phone Number</label>
+                        <input type="text" id="phone" />
+                        <label for="note">Note</label>
+                        <textarea id="note"></textarea>
+                        <input type="button" name="save" id="saveBtn" value="Save Contact" />
+                    </form>
+                </div><!-- /content -->
+                
+                <div data-role="footer">
+                    <h4>MobileContacts App</h4>
+                </div><!-- /footer -->
+                
+            </div><!-- /page -->
+
+
+             <!-- Edit Page -->
+            <div data-role="page" id="edit">
+
+                <div data-role="header">
+                    <a href="#home" data-icon="delete">Cancel</a>
+                    <h1>Edit Contact</h1>
+                </div><!-- /header -->
+
+                <div data-role="content">   
+                   <form>
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" />
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" />
+                        <label for="email">Email Address</label>
+                        <input type="text" id="email" />
+                        <label for="phone">Phone Number</label>
+                        <input type="text" id="phone" />
                         <label for="note">Note</label>
                         <textarea id="note"></textarea>
                         <input type="button" name="save" id="saveBtn" value="Save Contact" />

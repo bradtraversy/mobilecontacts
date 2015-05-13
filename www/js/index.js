@@ -9,6 +9,10 @@ function onDeviceReady() {
            saveContact();
        });
 
+       $('#editContact').on('click', function(){
+           alert('HI');console.log('HI');
+       });
+
        getContacts();
    });
 }     
@@ -19,7 +23,7 @@ function getContacts(){
     var options = new ContactFindOptions();
     options.filter=""; 
     options.multiple=true;
-    var fields = ["displayName"];
+    var fields = ["displayName","id"];
     navigator.contacts.find(fields, onGetSuccess, onGetError, options);
 }
 
@@ -27,7 +31,7 @@ function getContacts(){
 function onGetSuccess(contacts){
     $('#contactMsg').hide();
     for (var i = 0; i < contacts.length; i++) {
-        $('#contactList').append('<li>'+contacts[i].displayName+'</li>');
+        $('#contactList').append('<li><a id="editContact" href="#edit" data-contact_id="'+contacts[i].id+'">'+contacts[i].displayName+'</a></li>');
     }
     $( "#contactList" ).listview( "refresh" );
 }
@@ -46,6 +50,7 @@ function saveContact(){
     var fullName     = $('#firstName').val()+' '+$('#lastName').val();
     var note         = $('#note').val();
     var emailAddress = $('#email').val();
+    var phone        = $('#phone').val();
     
     // Create Contact Object
     var myContact = navigator.contacts.create({"displayName" : fullName});
@@ -57,7 +62,12 @@ function saveContact(){
     var emails = [];
     emails[0] = new ContactField('email', emailAddress, false); 
     myContact.emails = emails;
-    
+
+    // Phone Number Field
+    var phoneNumbers = [];
+    phoneNumbers[0] = new ContactField('mobile', phone, true);
+    myContact.phoneNumbers = phoneNumbers;
+
     //Save Contact   
     myContact.save(onSaveSuccess, onSaveError);
 
@@ -67,9 +77,12 @@ function saveContact(){
 // Contact Added
 function onSaveSuccess(contact){
     alert('Your Contact Has Been Saved');
+    window.location.href="#home";
 }
 
 // Contact Add Error
 function onSaveError(error){
     alert('Error: '+ error.code);
 }
+
+
