@@ -25,9 +25,11 @@ function getContacts(){
 
 // Contacts Fetched
 function onGetSuccess(contacts){
+    $('#contactMsg').hide();
     for (var i = 0; i < contacts.length; i++) {
         $('#contactList').append('<li>'+contacts[i].displayName+'</li>');
     }
+    $( "#contactList" ).listview( "refresh" );
 }
 
 // Contact Fetch Error
@@ -57,7 +59,9 @@ function saveContact(){
     myContact.emails = emails;
     
     //Save Contact   
-    myContact.save(onSaveSuccess, onSaveError);             
+    myContact.save(onSaveSuccess, onSaveError);
+
+
 }
 
 // Contact Added
