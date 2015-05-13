@@ -40,7 +40,6 @@ function onGetError(error){
 
 // Add a Contact
 function saveContact(){
-    console.log('Getting Contact Info...');
     // Get Form Values
     var firstName    = $('#firstName').val();
     var lastName     = $('#lastName').val();
@@ -108,12 +107,19 @@ function showContact( urlObj, options ){
     navigator.contacts.find(fields, onGetSingleSuccess, onGetSingleError, options);
 }
 
+
 // Contacts Fetched
 function onGetSingleSuccess(contacts){
-   console.log(contacts[0]);
+   console.log(contacts[0].phoneNumbers[0]);
+   // Fill Form
    $('input[id=firstName]').val(contacts[0].name.givenName);
    $('input[id=lastName]').val(contacts[0].name.familyName);
+   $('input[id=email]').val(contacts[0].emails[0].value);
+   $('input[id=phone]').val(contacts[0].phoneNumbers[0].value);
+   $('input[id=note]').val(contacts[0].note);
+   $('input[id=cid]').val(contacts[0].id);
 }
+
 
 // Contact Fetch Error
 function onGetSingleError(error){
@@ -121,3 +127,48 @@ function onGetSingleError(error){
 }
 
 
+// Update a Contact
+function updateContact(){
+    // Get Form Values
+    var firstName    = $('#firstName').val();
+    var lastName     = $('#lastName').val();
+    var fullName     = $('#firstName').val()+' '+$('#lastName').val();
+    var note         = $('#note').val();
+    var emailAddress = $('#email').val();
+    var phone        = $('#phone').val();
+    var cid          = $('#cid').val();
+    
+    // Create Contact Object
+    var myContact = navigator.contacts.create({"displayName" : fullName});
+    
+    // ID Field
+     myContact.id = cid;
+
+    // Note Field
+    myContact.note = note;
+    
+    // Email Field
+    var emails = [];
+    emails[0] = new ContactField('email', emailAddress, false); 
+    myContact.emails = emails;
+
+    // Phone Number Field
+    var phoneNumbers = [];
+    phoneNumbers[0] = new ContactField('mobile', phone, true);
+    myContact.phoneNumbers = phoneNumbers;
+
+    //Save Contact   
+    myContact.save(onUpdateSuccess, onUpdateError);
+
+}
+
+// Contact Updated
+function onUpdateSuccess(contact){
+    alert('Your Contact Has Been Updated');
+    window.location.href="#home";
+}
+
+// Contact Update Error
+function onUpdateError(error){
+    alert('Error: '+ error.code);
+}
