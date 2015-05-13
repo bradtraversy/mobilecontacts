@@ -112,11 +112,11 @@ function showContact( urlObj, options ){
 function onGetSingleSuccess(contacts){
    console.log(contacts[0].phoneNumbers[0]);
    // Fill Form
-   $('input[id=firstName]').val(contacts[0].name.givenName);
-   $('input[id=lastName]').val(contacts[0].name.familyName);
-   $('input[id=email]').val(contacts[0].emails[0].value);
-   $('input[id=phone]').val(contacts[0].phoneNumbers[0].value);
-   $('input[id=note]').val(contacts[0].note);
+   $('input[id=firstNameEdit]').val(contacts[0].name.givenName);
+   $('input[id=lastNameEdit]').val(contacts[0].name.familyName);
+   $('input[id=emailEdit]').val(contacts[0].emails[0].value);
+   $('input[id=phoneEdit]').val(contacts[0].phoneNumbers[0].value);
+   $('input[id=noteEdit]').val(contacts[0].note);
    $('input[id=cid]').val(contacts[0].id);
 }
 
@@ -130,12 +130,12 @@ function onGetSingleError(error){
 // Update a Contact
 function updateContact(){
     // Get Form Values
-    var firstName    = $('#firstName').val();
-    var lastName     = $('#lastName').val();
-    var fullName     = $('#firstName').val()+' '+$('#lastName').val();
-    var note         = $('#note').val();
-    var emailAddress = $('#email').val();
-    var phone        = $('#phone').val();
+    var firstName    = $('#firstNameEdit').val();
+    var lastName     = $('#lastNameEdit').val();
+    var fullName     = $('#firstNameEdit').val()+' '+$('#lastNameEdit').val();
+    var note         = $('#noteEdit').val();
+    var emailAddress = $('#emailEdit').val();
+    var phone        = $('#phoneEdit').val();
     var cid          = $('#cid').val();
     
     // Create Contact Object
