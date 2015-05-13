@@ -69,6 +69,38 @@
                 </div><!-- /footer -->
                 
             </div><!-- /page -->
+
+
+              <!-- Edit Page -->
+            <div data-role="page" id="edit">
+
+                <div data-role="header">
+                    <a href="#home" data-icon="delete">Cancel</a>
+                    <h1>Edit Contact</h1>
+                </div><!-- /header -->
+
+                <div data-role="content">   
+                   <form>
+                        <label for="firstNameEdit">First Name</label>
+                        <input type="text" id="firstNameEdit" />
+                        <label for="lastNameEdit">Last Name</label>
+                        <input type="text" id="lastNameEdit" />
+                        <label for="emailEdit">Email Address</label>
+                        <input type="text" id="emailEdit" />
+                        <label for="phoneEdit">Phone Number</label>
+                        <input type="text" id="phoneEdit" />
+                        <label for="noteEdit">Note</label>
+                        <textarea id="noteEdit"></textarea>
+                        <input type="hidden" id="cid">
+                        <input type="button" name="update" id="updateBtn" value="Update Contact" />
+                    </form>
+                </div><!-- /content -->
+                
+                <div data-role="footer">
+                    <h4>MobileContacts App</h4>
+                </div><!-- /footer -->
+                
+            </div><!-- /page -->
         </div>
         <script src="js/jquery.js"></script>
         <script src="js/jquery.mobile.js"></script>

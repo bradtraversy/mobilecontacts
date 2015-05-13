@@ -84,6 +84,24 @@ function onSaveError(error){
 }
 
 
-$(document).on('pageinit', '#edit', function(){ 
-    alert('Edit');
+// Listen for any attempts to call changePage().
+$(document).bind( "pagebeforechange", function( e, data ) {
+    if ( typeof data.toPage === "string" ) {
+        var u = $.mobile.path.parseUrl( data.toPage ),
+            re = /^#edit/;
+
+        if ( u.hash.search(re) !== -1 ) {       
+            showContact( u, data.options );
+            //e.preventDefault();
+        }
+    }
 });
+
+
+function showContact( urlObj, options ){
+   var contactId = urlObj.hash.replace( /.*id=/, "" );
+ 
+   $('input[id=firstNameEdit]').val(contactId);
+
+  
+}
